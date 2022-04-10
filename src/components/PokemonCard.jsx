@@ -8,14 +8,16 @@ import {
   Stack,
   Divider,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { titleCase } from "../utilities";
 import TypeChip from "./TypeChip";
 
 function PokemonCard({ name, img, id, types }) {
+  const navigate = useNavigate();
   return (
     <Grid item xs={12} sm={4} md={3}>
       <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea onClick={() => console.log("card cliked")}>
+        <CardActionArea onClick={() => navigate(`/pokemon/${id}`)}>
           <Typography
             variant="overline"
             position="absolute"
