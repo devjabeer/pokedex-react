@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../config";
-import axios from "axios";
+import { getPokemon } from "../services/api";
 
+// USED BEFORE IMPLEMENTING REDUX TOOLKIT - NOT USING ANYWHERE NOW
 export default function useGetPokemonData() {
   const [pokemonData, setpokemonData] = useState(null);
   useEffect(() => {
@@ -9,14 +9,7 @@ export default function useGetPokemonData() {
   }, []);
 
   async function getData() {
-    const promises = await axios
-      .get(BASE_URL + "pokemon?limit=20&offset=0")
-      .then((res) => {
-        return res.data.results.map((e) => axios.get(e.url));
-      });
-    const data = await (
-      await Promise.all(promises).then((res) => res)
-    ).map((e) => e.data);
+    const data = await getPokemon();
     setpokemonData(data);
   }
   return pokemonData;

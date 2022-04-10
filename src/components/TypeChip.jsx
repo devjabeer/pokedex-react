@@ -1,87 +1,87 @@
 import React from "react";
-import { Chip } from "@mui/material";
+import { Chip, Icon } from "@mui/material";
 import { titleCase } from "../utilities";
 
 const types = {
   normal: {
     color: "#757575",
-    icon: "house",
+    icon: "catching_pokemon",
   },
   fighting: {
     color: "#dd2c00",
-    icon: "house",
+    icon: "sports_mma",
   },
   flying: {
     color: "#2196f3",
-    icon: "house",
+    icon: "paragliding",
   },
   poison: {
     color: "#673ab7",
-    icon: "house",
+    icon: "science",
   },
   ground: {
     color: "#3e2723",
-    icon: "house",
+    icon: "map",
   },
   rock: {
     color: "#bdbdbd",
-    icon: "house",
+    icon: "landscape",
   },
   bug: {
     color: "#33691e",
-    icon: "house",
+    icon: "pest_control",
   },
   ghost: {
     color: "#8d6e63",
-    icon: "house",
+    icon: "blur_on",
   },
   steel: {
     color: "#616161",
-    icon: "house",
+    icon: "square",
   },
   fire: {
     color: "#b71c1c",
-    icon: "house",
+    icon: "whatshot",
   },
   water: {
     color: "#2962ff",
-    icon: "house",
+    icon: "water_drop",
   },
   grass: {
     color: "#43a047",
-    icon: "house",
+    icon: "grass",
   },
   electric: {
     color: "#ef6c00",
-    icon: "house",
+    icon: "electric_bolt",
   },
   psychic: {
     color: "#f06292",
-    icon: "house",
+    icon: "psychology",
   },
   ice: {
     color: "#81d4fa",
-    icon: "house",
+    icon: "ac_unit",
   },
   dragon: {
     color: "#7c4dff",
-    icon: "house",
+    icon: "visibility",
   },
   dark: {
     color: "#5d4037",
-    icon: "house",
+    icon: "shield_moon",
   },
   fairy: {
     color: "#f48fb1",
-    icon: "house",
+    icon: "star_purple500",
   },
   unknown: {
-    color: "#FFFFFF",
-    icon: "house",
+    color: "#b26500",
+    icon: "catching_pokemon",
   },
   shadow: {
-    color: "#FFFFFF",
-    icon: "house",
+    color: "#2c387e",
+    icon: "contrast",
   },
 };
 
@@ -94,6 +94,7 @@ function TypeChip({ type }) {
         backgroundColor: `${types[type].color}`,
         color: "white",
       }}
+      icon={<Icon>{types[type].icon}</Icon>}
       size="small"
     />
   );

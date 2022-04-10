@@ -6,13 +6,17 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
 import { CssBaseline } from "@mui/material";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 const root = createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </ThemeProvider>
 );
 
