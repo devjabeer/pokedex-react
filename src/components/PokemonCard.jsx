@@ -27,7 +27,13 @@ function PokemonCard({ name, img, id, types }) {
             {"#" + id}
           </Typography>
           <CardMedia children height="200">
-            <img src={img} width="100%" height="200" alt={name} />
+            <img
+              src={img}
+              width="100%"
+              height="200"
+              alt={name}
+              loading="lazy"
+            />
           </CardMedia>
           <Divider variant="middle" />
           <CardContent>

@@ -29,6 +29,7 @@ function Pokedex() {
       dataLength={pokemonData.length}
       next={fetchMorePokemon}
       hasMore={next ? true : false}
+      scrollThreshold={0.95}
     >
       <Grid container justifyContent="center" alignContent="center" spacing={2}>
         {pokemonData.map(({ id, name, sprites, types }) => {

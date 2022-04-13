@@ -5,7 +5,9 @@ import {
   Typography,
   Button,
   CssBaseline,
+  Icon,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const buttons = [
@@ -24,8 +26,18 @@ function AppNavigation() {
         <CssBaseline />
         <Container>
           <Toolbar>
-            <Typography variant="h6" noWrap component="div" sx={{ mr: 2 }}>
-              Pokedex
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                mr: 2,
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <Icon style={{}}>catching_pokemon</Icon> <span>Pokedex</span>
             </Typography>
             {buttons.map((b) => (
               <Button

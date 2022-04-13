@@ -14,8 +14,12 @@ export const getPokemon = async (n) => {
 };
 
 export const getPokemonById = async (id) => {
-  const data = await axios.get(BASE_URL + `pokemon/${id}`).then((res) => {
+  const p = await axios.get(BASE_URL + `pokemon/${id}`).then((res) => {
     return res.data;
   });
-  return data;
+  const s = await axios.get(p.species.url).then((res) => {
+    return res.data;
+  });
+  p.species.data = s;
+  return p;
 };

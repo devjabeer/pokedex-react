@@ -85,16 +85,16 @@ const types = {
   },
 };
 
-function TypeChip({ type }) {
+function TypeChip({ type, cursor = "pointer" }) {
   return (
     <Chip
       label={titleCase(type)}
       style={{
-        cursor: "pointer",
+        cursor: { cursor },
         backgroundColor: `${types[type].color}`,
         color: "white",
       }}
-      icon={<Icon>{types[type].icon}</Icon>}
+      icon={<Icon style={{ color: "white" }}>{types[type].icon}</Icon>}
       size="small"
     />
   );
