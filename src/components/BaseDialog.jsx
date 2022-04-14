@@ -11,7 +11,13 @@ import {
 import React from "react";
 import Loading from "./Loading";
 
-function BaseDialog({ open, handleClose, content, titlePrefix }) {
+function BaseDialog({
+  open,
+  handleClose,
+  content = {},
+  titlePrefix = "",
+  children,
+}) {
   return (
     <Dialog
       maxWidth="xs"
@@ -29,7 +35,9 @@ function BaseDialog({ open, handleClose, content, titlePrefix }) {
       </DialogTitle>
       <Divider />
       <DialogContent>
-        {content.desc ? (
+        {children ? (
+          children
+        ) : content.desc ? (
           <DialogContentText>{content.desc}</DialogContentText>
         ) : (
           <Loading />

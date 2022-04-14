@@ -27,7 +27,6 @@ function AbilitiesCard({ abilities }) {
     setOpen(true);
     const { effect } = await getContent(url);
     setContent({ title, desc: effect });
-    console.log("url: " + url);
   };
   const getContent = async (url) => {
     if (apiData[url]) {

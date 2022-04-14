@@ -8,7 +8,6 @@ import DescCard from "../components/details/DescCard";
 import MoveCard from "../components/details/MoveCard";
 import PhotoCard from "../components/details/PhotoCard";
 import StatsCard from "../components/details/StatsCard";
-import DetailsCard from "../components/DetailsCard";
 import Loading from "../components/Loading";
 import { fetchPokemonById } from "../store/detailsSlice";
 import { titleCase } from "../utilities";
@@ -22,6 +21,24 @@ function PokemonDetails() {
     dispatch(fetchPokemonById(id));
   }, []);
 
+  const getSprites = () => {
+    const sprites = [];
+    function extract(obj) {
+      for (const key in obj) {
+        if (key === "other") {
+          continue;
+        }
+        if (obj[key] && typeof obj[key] === "string") {
+          sprites.push(obj[key]);
+        } else {
+          extract(obj[key]);
+        }
+      }
+    }
+    extract(pokemon.sprites);
+    return sprites;
+  };
+
   const getDesc = () => {
     return pokemon.species.data.form_descriptions.length > 0
       ? pokemon.species.data.form_descriptions.filter(
@@ -30,9 +47,11 @@ function PokemonDetails() {
       : "";
   };
   const getFlavorText = () => {
-    return pokemon.species.data.flavor_text_entries.filter(
-      (e) => e.language.name === "en"
-    )[0].flavor_text;
+    return pokemon.species.data.flavor_text_entries
+      .filter((e) => e.language.name === "en")
+      .map((e) => {
+        return { version: titleCase(e.version.name), text: e.flavor_text };
+      });
   };
 
   const getStats = () => {
@@ -83,6 +102,78 @@ function PokemonDetails() {
       ],
     ];
   };
+  const getSpeciesInfo = () => {
+    const {
+      color,
+      egg_groups,
+      forms_switchable,
+      genera,
+      generation,
+      growth_rate,
+      habitat,
+      has_gender_differences,
+      is_baby,
+      is_legendary,
+      is_mythical,
+      shape,
+    } = pokemon.species.data;
+    return [
+      ["Color", titleCase(color.name), "The color of this Pokémon."],
+      ["Shape", titleCase(shape.name), "The shape of this Pokémon."],
+      [
+        "Egg Groups",
+        egg_groups.map((e) => e.name[0].toUpperCase()).join(" | "),
+        `A list of egg groups this Pokémon species is a member of. \n${egg_groups
+          .map((e) => e.name[0].toUpperCase() + ": " + titleCase(e.name))
+          .join(" | ")}`,
+      ],
+      [
+        "Switchable?",
+        titleCase(forms_switchable.toString()),
+        "Whether or not this Pokémon has multiple forms and can switch between them.",
+      ],
+      [
+        "Genus",
+        genera.filter((e) => e.language.name === "en")[0].genus,
+        "The genus of this Pokémon species.",
+      ],
+      [
+        "Generation",
+        generation.name.substring(11).toUpperCase(),
+        "The generation this Pokémon species was introduced in.",
+      ],
+      [
+        "Growth Rate",
+        titleCase(growth_rate.name),
+        "The rate at which this Pokémon species gains levels.",
+      ],
+      [
+        "Habitat",
+        titleCase(habitat.name),
+        "The habitat this Pokémon species can be encountered in.",
+      ],
+      [
+        "Gender Differences?",
+        titleCase(has_gender_differences.toString()),
+        "Whether or not this Pokémon has visual gender differences.",
+      ],
+      [
+        "Baby?",
+        titleCase(is_baby.toString()),
+        "Whether or not this is a baby Pokémon.",
+      ],
+      [
+        "Legendary?",
+        titleCase(is_legendary.toString()),
+        "Whether or not this is a legendary Pokémon.",
+      ],
+      [
+        "Mythical?",
+        titleCase(is_mythical.toString()),
+        "Whether or not this is a mythical Pokémon.",
+      ],
+    ];
+  };
   const getSpeciesStats = () => {
     const { order, base_happiness, capture_rate, gender_rate, hatch_counter } =
       pokemon.species.data;
@@ -128,7 +219,7 @@ function PokemonDetails() {
   const getMoves = () => {
     return {
       count: pokemon.moves.length,
-      moves: pokemon.moves.map((e) => titleCase(e.move.name)).join(" | "),
+      moves: pokemon.moves.map((e) => titleCase(e.move.name)),
     };
   };
 
@@ -147,6 +238,7 @@ function PokemonDetails() {
               ? pokemon.sprites.other.dream_world.front_default
               : pokemon.sprites.other["official-artwork"].front_default
           }
+          sprites={getSprites()}
         />
         <DescCard
           name={titleCase(pokemon.name)}
@@ -155,13 +247,11 @@ function PokemonDetails() {
           flavorText={getFlavorText()}
           types={pokemon.types.map((e) => e.type.name)}
         />
-        <StatsCard stats={getSpeciesStats()} title="Species Info" />
+        <StatsCard stats={getSpeciesInfo()} title="Species Info" />
         <StatsCard stats={getSpeciesStats()} title="Species Stats" />
         <StatsCard stats={getStats()} title="Pokemon Stats" />
         <AbilitiesCard abilities={getAbilities()} />
         <MoveCard moves={getMoves()} />
-        <DetailsCard />
-        <DetailsCard />
       </Masonry>
     </Box>
   );
