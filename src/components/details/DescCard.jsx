@@ -20,7 +20,7 @@ function DescCard({ name, species, flavorText, desc, types }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClick = async (url, title) => {
+  const handleClick = () => {
     setOpen(true);
   };
   return (

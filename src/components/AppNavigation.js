@@ -3,17 +3,15 @@ import {
   Container,
   Toolbar,
   Typography,
-  Button,
   CssBaseline,
   Icon,
+  IconButton,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
-import { Box } from "@mui/system";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const buttons = [
-  { text: "Home", path: "/" },
-  { text: "Favourite", path: "/favourite" },
-];
+// const buttons = [{ text: "Favourite", path: "/favourite" }];
 
 function AppNavigation() {
   const navigate = useNavigate();
@@ -35,11 +33,13 @@ function AppNavigation() {
                 display: "flex",
                 alignItems: "center",
                 flexWrap: "wrap",
+                cursor: "pointer",
               }}
+              onClick={() => clickHandler("/")}
             >
               <Icon style={{}}>catching_pokemon</Icon> <span>Pokedex</span>
             </Typography>
-            {buttons.map((b) => (
+            {/* {buttons.map((b) => (
               <Button
                 key={b.text}
                 variant="text"
@@ -51,7 +51,29 @@ function AppNavigation() {
               >
                 {b.text}
               </Button>
-            ))}
+            ))} */}
+            <IconButton
+              onClick={() => clickHandler("/favorite")}
+              sx={{ color: "red" }}
+            >
+              <Icon>favorite</Icon>
+            </IconButton>
+            {/* <Autocomplete
+              size="small"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                alignContent: "flex-end",
+                width: "100",
+              }}
+              width="40"
+              freeSolo
+              options={["fas"]}
+              renderInput={(p) => (
+                <TextField {...p} width="30" label="freeSolo" />
+              )}
+            /> */}
           </Toolbar>
         </Container>
       </AppBar>

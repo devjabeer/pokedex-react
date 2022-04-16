@@ -8,6 +8,7 @@ import DescCard from "../components/details/DescCard";
 import MoveCard from "../components/details/MoveCard";
 import PhotoCard from "../components/details/PhotoCard";
 import StatsCard from "../components/details/StatsCard";
+import Error404 from "../components/Error404";
 import Loading from "../components/Loading";
 import { fetchPokemonById } from "../store/detailsSlice";
 import { titleCase } from "../utilities";
@@ -15,7 +16,7 @@ import { titleCase } from "../utilities";
 function PokemonDetails() {
   const { id } = useParams();
 
-  const { loading, pokemon } = useSelector((state) => state.details);
+  const { loading, pokemon, error } = useSelector((state) => state.details);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPokemonById(id));
@@ -149,7 +150,7 @@ function PokemonDetails() {
       ],
       [
         "Habitat",
-        titleCase(habitat.name),
+        titleCase(habitat ? habitat.name : "Null"),
         "The habitat this Pokémon species can be encountered in.",
       ],
       [
@@ -225,6 +226,8 @@ function PokemonDetails() {
 
   return loading ? (
     <Loading />
+  ) : error ? (
+    <Error404 />
   ) : (
     <Box>
       <Masonry

@@ -15,7 +15,7 @@ function MoveCard({ moves }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClick = async (url, title) => {
+  const handleClick = () => {
     setOpen(true);
   };
   return (

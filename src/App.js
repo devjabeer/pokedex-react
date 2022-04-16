@@ -3,7 +3,6 @@ import AppNavigation from "./components/AppNavigation";
 import Pokedex from "./pages/Pokedex";
 import PokemonDetails from "./pages/PokemonDetails";
 function App() {
-  console.log("app loaded");
   return (
     <Routes>
       <Route element={<AppNavigation />}>

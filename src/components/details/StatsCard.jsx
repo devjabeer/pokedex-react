@@ -40,7 +40,13 @@ function StatsCard({ title, stats }) {
                     >
                       {e[1]}
                     </Typography>
-                    <Tooltip title={e[2]} arrow>
+                    <Tooltip
+                      disableFocusListener
+                      enterTouchDelay={0}
+                      title={e[2]}
+                      arrow
+                      placement="right"
+                    >
                       <Icon sx={{ fontSize: 14 }}>help_outline</Icon>
                     </Tooltip>
                   </Box>

@@ -15,7 +15,7 @@ function PhotoCard({ src, sprites }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClick = async (url, title) => {
+  const handleClick = () => {
     setOpen(true);
   };
   return (
@@ -25,7 +25,7 @@ function PhotoCard({ src, sprites }) {
           src={src}
           width="100%"
           height="100%"
-          alt="Fetching issues..."
+          alt="Pokemon"
           loading="lazy"
         />
       </CardMedia>
@@ -54,7 +54,7 @@ function PhotoCard({ src, sprites }) {
                     src={e}
                     width="50"
                     height="50"
-                    alt="Fetching issues..."
+                    alt="Pokemon"
                     loading="lazy"
                   />
                 </CardMedia>

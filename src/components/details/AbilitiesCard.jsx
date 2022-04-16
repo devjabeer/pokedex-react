@@ -21,7 +21,9 @@ function AbilitiesCard({ abilities }) {
   const [apiData, setApiData] = useState({});
   const handleClose = () => {
     setOpen(false);
-    setContent({});
+    setTimeout(() => {
+      setContent({});
+    }, 1000);
   };
   const handleClick = async (url, title) => {
     setOpen(true);

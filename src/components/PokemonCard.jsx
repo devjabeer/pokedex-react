@@ -7,15 +7,19 @@ import {
   CardActionArea,
   Stack,
   Divider,
+  IconButton,
+  Icon,
+  CardActions,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { titleCase } from "../utilities";
 import TypeChip from "./TypeChip";
 
-function PokemonCard({ name, img, id, types }) {
+function PokemonCard({ name, img, id, types, color, save }) {
   const navigate = useNavigate();
   return (
-    <Grid item xs={12} sm={4} md={3}>
+    <Grid item xs={6} sm={4} md={3}>
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea onClick={() => navigate(`/pokemon/${id}`)}>
           <Typography
@@ -38,7 +42,7 @@ function PokemonCard({ name, img, id, types }) {
           <Divider variant="middle" />
           <CardContent>
             <Typography
-              gutterBottom
+              sx={{ pl: 1 }}
               variant="h6"
               fontWeight="600"
               component="div"
@@ -48,18 +52,23 @@ function PokemonCard({ name, img, id, types }) {
             {/* <Typography variant="body2" color="text.secondary">
               Lizards are a widespread group
             </Typography> */}
-            <Stack direction="row" spacing={1}>
-              {types.map((e) => {
-                return <TypeChip key={e} type={e} />;
-              })}
-            </Stack>
           </CardContent>
         </CardActionArea>
-        {/* 
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions> */}
+
+        <CardActions disableSpacing>
+          <Stack direction="row" spacing={1}>
+            {types.map((e) => {
+              return <TypeChip key={e} type={e} />;
+            })}
+          </Stack>
+          <IconButton
+            onClick={() => save(id)}
+            sx={{ color: { color } }}
+            style={{ marginLeft: "auto", padding: "0" }}
+          >
+            <Icon>favorite</Icon>
+          </IconButton>
+        </CardActions>
       </Card>
     </Grid>
   );
