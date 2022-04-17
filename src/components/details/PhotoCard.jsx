@@ -5,12 +5,15 @@ import {
   CardActions,
   Grid,
   Typography,
+  IconButton,
+  Icon,
 } from "@mui/material";
 import React, { useState } from "react";
 import BaseCard from "./BaseCard";
 import BaseDialog from "../BaseDialog";
+import FavButton from "../FavButton";
 
-function PhotoCard({ src, sprites }) {
+function PhotoCard({ src, sprites, click, fav }) {
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -34,6 +37,7 @@ function PhotoCard({ src, sprites }) {
         <Button fullWidth onClick={handleClick} variant="outlined">
           view All Sprites
         </Button>
+        <FavButton spacing click={click} fav={fav} />
       </CardActions>
       <BaseDialog
         open={open}

@@ -10,16 +10,18 @@ import PhotoCard from "../components/details/PhotoCard";
 import StatsCard from "../components/details/StatsCard";
 import Error404 from "../components/Error404";
 import Loading from "../components/Loading";
+import useSave from "../hooks/useSave";
 import { fetchPokemonById } from "../store/detailsSlice";
 import { titleCase } from "../utilities";
 
 function PokemonDetails() {
   const { id } = useParams();
-
   const { loading, pokemon, error } = useSelector((state) => state.details);
+
+  const { fav, save } = useSave();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchPokemonById(id));
+    dispatch(fetchPokemonById(+id));
   }, []);
 
   const getSprites = () => {
@@ -242,6 +244,8 @@ function PokemonDetails() {
               : pokemon.sprites.other["official-artwork"].front_default
           }
           sprites={getSprites()}
+          click={() => save(+id)}
+          fav={fav?.includes(+id)}
         />
         <DescCard
           name={titleCase(pokemon.name)}

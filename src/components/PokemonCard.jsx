@@ -14,9 +14,10 @@ import {
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { titleCase } from "../utilities";
+import FavButton from "./FavButton";
 import TypeChip from "./TypeChip";
 
-function PokemonCard({ name, img, id, types, color, save }) {
+function PokemonCard({ name, img, id, types, fav, save }) {
   const navigate = useNavigate();
   return (
     <Grid item xs={6} sm={4} md={3}>
@@ -61,13 +62,9 @@ function PokemonCard({ name, img, id, types, color, save }) {
               return <TypeChip key={e} type={e} />;
             })}
           </Stack>
-          <IconButton
-            onClick={() => save(id)}
-            sx={{ color: { color } }}
-            style={{ marginLeft: "auto", padding: "0" }}
-          >
-            <Icon>favorite</Icon>
-          </IconButton>
+          <Box style={{ marginLeft: "auto", padding: "0" }}>
+            <FavButton click={() => save(id)} fav={fav} />
+          </Box>
         </CardActions>
       </Card>
     </Grid>
