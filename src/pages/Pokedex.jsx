@@ -13,11 +13,9 @@ function Pokedex() {
 
   // const [fav, setFav] = useState(null);
   const { fav, save } = useSave();
-  const {
-    pokemon: pokemonData,
-    loading,
-    next,
-  } = useSelector((state) => state.pokemon);
+  const { pokemon: pokemonData, loading, next } = useSelector(
+    (state) => state.pokemon
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPokemon());
@@ -33,7 +31,12 @@ function Pokedex() {
       scrollThreshold={0.95}
       style={{ color: "red" }}
     >
-      <Grid container justifyContent="center" alignContent="center" spacing={2}>
+      <Grid
+        container
+        justifyContent="center"
+        alignContent="center"
+        spacing={{ xs: 1, sm: 2 }}
+      >
         {pokemonData.map(({ id, name, sprites, types }) => {
           const img = sprites.other.dream_world.front_default
             ? sprites.other.dream_world.front_default

@@ -10,7 +10,6 @@ function useSave() {
   const save = (id) => {
     try {
       const f = JSON.parse(localStorage.getItem("fav")) || [];
-      console.log("save: f " + f);
       if (f.includes(+id)) {
         // Remove item
         const ind = f.findIndex((e) => e === +id);

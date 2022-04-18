@@ -9,10 +9,10 @@ export const fetchFavPokemon = createAsyncThunk(
     const current = getState().favorite.pokemon.map((e) => e.id);
     const added = n.filter((e) => !current.includes(e));
     const removed = current.filter((e) => !n.includes(e));
-    console.log("n: " + n);
-    console.log("c: " + current);
-    console.log("a: " + added);
-    console.log("r: " + removed);
+    // console.log("n: " + n);
+    // console.log("c: " + current);
+    // console.log("a: " + added);
+    // console.log("r: " + removed);
     if (removed.length > 0) {
       dispatch(actions.remove(removed));
     }

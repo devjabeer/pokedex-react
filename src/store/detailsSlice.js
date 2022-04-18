@@ -12,7 +12,6 @@ export const fetchPokemonById = createAsyncThunk(
   }
 );
 
-// First, define the reducer and action creators via `createSlice`
 const { reducer } = createSlice({
   name: "pokemonDetails",
   initialState: {

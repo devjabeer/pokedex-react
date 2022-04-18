@@ -178,8 +178,13 @@ function PokemonDetails() {
     ];
   };
   const getSpeciesStats = () => {
-    const { order, base_happiness, capture_rate, gender_rate, hatch_counter } =
-      pokemon.species.data;
+    const {
+      order,
+      base_happiness,
+      capture_rate,
+      gender_rate,
+      hatch_counter,
+    } = pokemon.species.data;
     return [
       [
         "Order",
@@ -229,7 +234,7 @@ function PokemonDetails() {
   return loading ? (
     <Loading />
   ) : error ? (
-    <Error404 />
+    <Error404 text={error} />
   ) : (
     <Box>
       <Masonry

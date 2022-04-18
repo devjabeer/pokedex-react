@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Alert, Grid, Icon } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Delayed from "../components/Delayed";
@@ -10,11 +10,9 @@ import { fetchFavPokemon } from "../store/favSlice";
 function Favorite() {
   const { fav, save } = useSave();
   const dispatch = useDispatch();
-  const {
-    pokemon: pokemonData,
-    loading,
-    error,
-  } = useSelector((state) => state.favorite);
+  const { pokemon: pokemonData, loading, error } = useSelector(
+    (state) => state.favorite
+  );
   useEffect(() => {
     if (fav !== null) dispatch(fetchFavPokemon(fav));
   }, [fav]);
@@ -46,8 +44,13 @@ function Favorite() {
         })}
     </Grid>
   ) : (
+    // This was added so that it does not flicker while getting pokemon data.
     <Delayed>
-      <h4>Click Heart Icon on Pokemon Cards to add it to favorite</h4>
+      <Alert severity="info" variant="outlined">
+        Your Favorite section is empty! Click on heart icon on pokemon card to
+        add it to the favorite. Please note that favorite are saved on your
+        local storage.
+      </Alert>
     </Delayed>
   );
 }

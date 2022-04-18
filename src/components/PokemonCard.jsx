@@ -10,8 +10,9 @@ import {
   IconButton,
   Icon,
   CardActions,
+  CardHeader,
 } from "@mui/material";
-import { Box } from "@mui/system";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { titleCase } from "../utilities";
 import FavButton from "./FavButton";
@@ -22,6 +23,12 @@ function PokemonCard({ name, img, id, types, fav, save }) {
   return (
     <Grid item xs={6} sm={4} md={3}>
       <Card sx={{ maxWidth: 345 }}>
+        <CardHeader
+          title={titleCase(name)}
+          sx={{ py: 1, fontSize: 9 }}
+          action={<FavButton click={() => save(id)} fav={fav} />}
+        />
+        <Divider />
         <CardActionArea onClick={() => navigate(`/pokemon/${id}`)}>
           <Typography
             variant="overline"
@@ -42,21 +49,26 @@ function PokemonCard({ name, img, id, types, fav, save }) {
           </CardMedia>
           <Divider variant="middle" />
           <CardContent>
-            <Typography
+            {/* <Typography
               sx={{ pl: 1 }}
               variant="h6"
               fontWeight="600"
               component="div"
             >
               {titleCase(name)}
-            </Typography>
+            </Typography> */}
             {/* <Typography variant="body2" color="text.secondary">
               Lizards are a widespread group
             </Typography> */}
+            <Stack direction="row" spacing={1}>
+              {types.map((e) => {
+                return <TypeChip key={e} type={e} />;
+              })}
+            </Stack>
           </CardContent>
         </CardActionArea>
 
-        <CardActions disableSpacing>
+        {/* <CardActions disableSpacing>
           <Stack direction="row" spacing={1}>
             {types.map((e) => {
               return <TypeChip key={e} type={e} />;
@@ -65,7 +77,7 @@ function PokemonCard({ name, img, id, types, fav, save }) {
           <Box style={{ marginLeft: "auto", padding: "0" }}>
             <FavButton click={() => save(id)} fav={fav} />
           </Box>
-        </CardActions>
+        </CardActions> */}
       </Card>
     </Grid>
   );
