@@ -4,21 +4,54 @@ import reportWebVitals from "./reportWebVitals";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-import theme from "./theme";
+//import theme from "./theme";
 import { CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { createTheme } from "@mui/material";
 const root = createRoot(document.getElementById("root"));
-root.render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </ThemeProvider>
-);
+
+export const ColorModeContext = React.createContext({
+  toggleColorMode: () => {},
+});
+
+const RootElement = () => {
+  const [mode, setMode] = React.useState("dark");
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+    }),
+    []
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
+  return (
+    <>
+      <CssBaseline />
+      <Provider store={store}>
+        <BrowserRouter>
+          <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
+          </ColorModeContext.Provider>
+        </BrowserRouter>
+      </Provider>
+    </>
+  );
+};
+
+root.render(<RootElement />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

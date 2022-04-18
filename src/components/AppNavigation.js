@@ -6,14 +6,18 @@ import {
   CssBaseline,
   Icon,
   IconButton,
-  Autocomplete,
-  TextField,
+  Box,
 } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
-
+import React from "react";
+import { ColorModeContext } from "..";
+import { useTheme } from "@emotion/react";
 // const buttons = [{ text: "Favourite", path: "/favourite" }];
 
 function AppNavigation() {
+  const colorMode = React.useContext(ColorModeContext);
+  const theme = useTheme();
+
   const navigate = useNavigate();
   const clickHandler = (path) => {
     navigate(path);
@@ -22,8 +26,8 @@ function AppNavigation() {
     <>
       <AppBar position="sticky">
         <CssBaseline />
-        <Container>
-          <Toolbar>
+        <Container style={{ px: 0 }}>
+          <Toolbar children>
             <Typography
               variant="h6"
               noWrap
@@ -39,41 +43,23 @@ function AppNavigation() {
             >
               <Icon style={{}}>catching_pokemon</Icon> <span>Pokedex</span>
             </Typography>
-            {/* {buttons.map((b) => (
-              <Button
-                key={b.text}
-                variant="text"
-                color="primary"
-                sx={{ ml: 2 }}
-                onClick={() => {
-                  clickHandler(b.path);
-                }}
-              >
-                {b.text}
-              </Button>
-            ))} */}
             <IconButton
               onClick={() => clickHandler("/favorite")}
               sx={{ color: "red" }}
             >
               <Icon>favorite</Icon>
             </IconButton>
-            {/* <Autocomplete
-              size="small"
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                alignContent: "flex-end",
-                width: "100",
-              }}
-              width="40"
-              freeSolo
-              options={["fas"]}
-              renderInput={(p) => (
-                <TextField {...p} width="30" label="freeSolo" />
+            <Box sx={{ flexGrow: 1 }} />
+            <IconButton
+              sx={{ color: "yellow" }}
+              onClick={colorMode.toggleColorMode}
+            >
+              {theme.palette.mode === "light" ? (
+                <Icon>dark_mode</Icon>
+              ) : (
+                <Icon>light_mode</Icon>
               )}
-            /> */}
+            </IconButton>
           </Toolbar>
         </Container>
       </AppBar>
