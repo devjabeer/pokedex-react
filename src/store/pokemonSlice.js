@@ -1,16 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getPokemon } from "../services/api";
 
+// Pokemon async operations
 export const fetchPokemon = createAsyncThunk(
   "pokemon/fetchPokemon",
-  async (n, thunkAPI) => {
+  async (next, thunkAPI) => {
     const val = thunkAPI.getState((state) => state);
-    if (val.pokemon.pokemon.length && !n) return false;
-    return await getPokemon(n);
+    // if its not first load and not next page and there is data in pokemon state, then don't call again
+    if (val.pokemon.pokemon.length && !next) return false;
+    // fetch next page
+    return await getPokemon(next);
   }
 );
 
-// First, define the reducer and action creators via `createSlice`
 const { reducer } = createSlice({
   name: "pokemon",
   initialState: {
@@ -19,6 +21,7 @@ const { reducer } = createSlice({
     next: "",
   },
   reducers: {},
+  // Extra reducers using builder, as per RTK
   extraReducers: (builder) => {
     builder
       .addCase(fetchPokemon.pending, (state) => {

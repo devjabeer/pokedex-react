@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+// Custom React Hook to save and fetch favorite from local storage
 function useSave() {
   const [fav, setFav] = useState([]);
   useEffect(() => {
@@ -26,7 +26,6 @@ function useSave() {
       console.error(error.message);
     }
   };
-
   return { save, fav };
 }
 

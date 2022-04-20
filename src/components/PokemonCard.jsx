@@ -7,9 +7,6 @@ import {
   CardActionArea,
   Stack,
   Divider,
-  IconButton,
-  Icon,
-  CardActions,
   CardHeader,
 } from "@mui/material";
 import React from "react";
@@ -49,17 +46,6 @@ function PokemonCard({ name, img, id, types, fav, save }) {
           </CardMedia>
           <Divider variant="middle" />
           <CardContent>
-            {/* <Typography
-              sx={{ pl: 1 }}
-              variant="h6"
-              fontWeight="600"
-              component="div"
-            >
-              {titleCase(name)}
-            </Typography> */}
-            {/* <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group
-            </Typography> */}
             <Stack direction="row" spacing={1}>
               {types.map((e) => {
                 return <TypeChip key={e} type={e} />;
@@ -67,17 +53,6 @@ function PokemonCard({ name, img, id, types, fav, save }) {
             </Stack>
           </CardContent>
         </CardActionArea>
-
-        {/* <CardActions disableSpacing>
-          <Stack direction="row" spacing={1}>
-            {types.map((e) => {
-              return <TypeChip key={e} type={e} />;
-            })}
-          </Stack>
-          <Box style={{ marginLeft: "auto", padding: "0" }}>
-            <FavButton click={() => save(id)} fav={fav} />
-          </Box>
-        </CardActions> */}
       </Card>
     </Grid>
   );

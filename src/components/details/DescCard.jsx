@@ -5,7 +5,6 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
   Stack,
   Typography,

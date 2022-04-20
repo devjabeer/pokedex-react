@@ -15,22 +15,24 @@ import { fetchPokemonById } from "../store/detailsSlice";
 import { titleCase } from "../utilities";
 
 function PokemonDetails() {
+  // use param gives id as String not as Number
   const { id } = useParams();
   const { loading, pokemon, error } = useSelector((state) => state.details);
 
   const { fav, save } = useSave();
   const dispatch = useDispatch();
   useEffect(() => {
+    // fetch pokemon by id
     dispatch(fetchPokemonById(+id));
   }, []);
 
+  // SETUP DATA FOR THE COMPOENETS
   const getSprites = () => {
     const sprites = [];
+    // recursion helper to extract sprite URLs
     function extract(obj) {
       for (const key in obj) {
-        if (key === "other") {
-          continue;
-        }
+        if (key === "other") continue;
         if (obj[key] && typeof obj[key] === "string") {
           sprites.push(obj[key]);
         } else {
@@ -178,13 +180,8 @@ function PokemonDetails() {
     ];
   };
   const getSpeciesStats = () => {
-    const {
-      order,
-      base_happiness,
-      capture_rate,
-      gender_rate,
-      hatch_counter,
-    } = pokemon.species.data;
+    const { order, base_happiness, capture_rate, gender_rate, hatch_counter } =
+      pokemon.species.data;
     return [
       [
         "Order",

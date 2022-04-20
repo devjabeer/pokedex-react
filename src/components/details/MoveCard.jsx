@@ -25,9 +25,6 @@ function MoveCard({ moves }) {
           Moves - {moves.count}
         </Typography>
         <Divider sx={{ mb: 1 }} />
-        {/* <Typography sx={{ mt: 1 }} variant="body2">
-          {moves.moves}
-        </Typography> */}
         {moves.moves.slice(0, 20).map((e) => {
           return (
             <Chip

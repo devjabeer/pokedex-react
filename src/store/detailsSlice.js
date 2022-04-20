@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getPokemonById } from "../services/api";
 
+// Details async operations
 export const fetchPokemonById = createAsyncThunk(
   "pokemon/fetchDetails",
   async (id, { rejectWithValue }) => {
+    // fetch details using id
     try {
       return await getPokemonById(id);
     } catch (error) {
@@ -20,6 +22,7 @@ const { reducer } = createSlice({
     error: null,
   },
   reducers: {},
+  // async reducers
   extraReducers: (builder) => {
     builder
       .addCase(fetchPokemonById.pending, (state) => {

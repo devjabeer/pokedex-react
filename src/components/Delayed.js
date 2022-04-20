@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-
-const Delayed = ({ children, waitBeforeShow = 100 }) => {
+// Delayed component will delay rendering of component
+const Delayed = ({ children, wait = 100 }) => {
   const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsShown(true);
-    }, waitBeforeShow);
+    }, wait);
     return () => clearTimeout(timer);
-  }, [waitBeforeShow]);
-
+  }, [wait]);
   return isShown ? children : null;
 };
 

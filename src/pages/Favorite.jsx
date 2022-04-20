@@ -1,4 +1,4 @@
-import { Alert, Grid, Icon } from "@mui/material";
+import { Alert, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Delayed from "../components/Delayed";
@@ -10,9 +10,11 @@ import { fetchFavPokemon } from "../store/favSlice";
 function Favorite() {
   const { fav, save } = useSave();
   const dispatch = useDispatch();
-  const { pokemon: pokemonData, loading, error } = useSelector(
-    (state) => state.favorite
-  );
+  const {
+    pokemon: pokemonData,
+    loading,
+    error,
+  } = useSelector((state) => state.favorite);
   useEffect(() => {
     if (fav !== null) dispatch(fetchFavPokemon(fav));
   }, [fav]);

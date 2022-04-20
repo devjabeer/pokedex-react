@@ -9,15 +9,16 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import React, { useState } from "react";
 import { titleCase } from "../../utilities";
 import BaseDialog from "../BaseDialog";
 import BaseCard from "./BaseCard";
+import { getAbility } from "../../services/api";
 
 function AbilitiesCard({ abilities }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState({});
+  // Cache api data
   const [apiData, setApiData] = useState({});
   const handleClose = () => {
     setOpen(false);
@@ -31,16 +32,9 @@ function AbilitiesCard({ abilities }) {
     setContent({ title, desc: effect });
   };
   const getContent = async (url) => {
-    if (apiData[url]) {
-      return apiData[url];
-    }
-
-    const data = await axios
-      .get(url)
-      .then(
-        (res) =>
-          res.data.effect_entries?.filter((e) => e.language.name === "en")[0]
-      );
+    // if already in cache
+    if (apiData[url]) return apiData[url];
+    const data = await getAbility(url);
     setApiData({ ...apiData, [url]: data });
     return data;
   };
@@ -52,7 +46,7 @@ function AbilitiesCard({ abilities }) {
         </Typography>
         <Divider />
         <List>
-          {abilities.map((e, i) => {
+          {abilities.map((e) => {
             return (
               <ListItem key={e.name} disableGutters>
                 <ListItemText primary={titleCase(e.name)} />

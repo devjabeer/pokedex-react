@@ -8,14 +8,12 @@ import Loading from "../components/Loading";
 import useSave from "../hooks/useSave";
 
 function Pokedex() {
-  // const pokemonData = useGetPokemonData();
-  // const { loading, pokemon: pokemonData } = useSelector((state) => state);
-
-  // const [fav, setFav] = useState(null);
   const { fav, save } = useSave();
-  const { pokemon: pokemonData, loading, next } = useSelector(
-    (state) => state.pokemon
-  );
+  const {
+    pokemon: pokemonData,
+    loading,
+    next,
+  } = useSelector((state) => state.pokemon);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPokemon());

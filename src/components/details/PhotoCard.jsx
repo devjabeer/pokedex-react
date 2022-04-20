@@ -1,13 +1,4 @@
-import {
-  Divider,
-  CardMedia,
-  Button,
-  CardActions,
-  Grid,
-  Typography,
-  IconButton,
-  Icon,
-} from "@mui/material";
+import { Divider, CardMedia, Button, CardActions, Grid } from "@mui/material";
 import React, { useState } from "react";
 import BaseCard from "./BaseCard";
 import BaseDialog from "../BaseDialog";

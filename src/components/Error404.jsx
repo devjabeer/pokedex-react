@@ -1,4 +1,4 @@
-import { Alert, Box, Container, Typography } from "@mui/material";
+import { Alert } from "@mui/material";
 import React from "react";
 
 function Error404({ text = "Resource not found!" }) {

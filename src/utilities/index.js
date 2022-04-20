@@ -1,3 +1,4 @@
+// utility
 export const titleCase = (str) => {
   return str
     .split("-")

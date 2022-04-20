@@ -1,6 +1,7 @@
 import { BASE_URL } from "../config";
 import axios from "axios";
-
+// API operations:
+// fetch pokemon by page,
 export const getPokemon = async (n) => {
   let next = "";
   const promises = await axios.get(BASE_URL + `pokemon?${n}`).then((res) => {
@@ -12,7 +13,7 @@ export const getPokemon = async (n) => {
   ).map((e) => e.data);
   return { data, next };
 };
-
+// fetch pokemon by ID
 export const getPokemonById = async (id) => {
   const p = await axios.get(BASE_URL + `pokemon/${id}`).then((res) => {
     return res.data;
@@ -23,7 +24,7 @@ export const getPokemonById = async (id) => {
   p.species.data = s;
   return p;
 };
-
+// Fetch favorite pokemon
 export const getFavPokemon = async (n) => {
   if (!n || n.length < 1) {
     return null;
@@ -35,4 +36,13 @@ export const getFavPokemon = async (n) => {
     await Promise.all(promises).then((res) => res)
   ).map((e) => e.data);
   return data;
+};
+// Fetch ability by url, only first english one
+export const getAbility = async (url) => {
+  return await axios
+    .get(url)
+    .then(
+      (res) =>
+        res.data.effect_entries?.filter((e) => e.language.name === "en")[0]
+    );
 };
