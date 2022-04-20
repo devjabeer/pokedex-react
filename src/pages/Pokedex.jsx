@@ -17,7 +17,7 @@ function Pokedex() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPokemon());
-  }, []);
+  }, [dispatch]);
   const fetchMorePokemon = () => {
     dispatch(fetchPokemon(next));
   };

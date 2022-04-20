@@ -17,7 +17,7 @@ function Favorite() {
   } = useSelector((state) => state.favorite);
   useEffect(() => {
     if (fav !== null) dispatch(fetchFavPokemon(fav));
-  }, [fav]);
+  }, [fav, dispatch]);
 
   return loading ? (
     <Loading />

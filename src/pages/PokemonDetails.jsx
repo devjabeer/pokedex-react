@@ -24,7 +24,7 @@ function PokemonDetails() {
   useEffect(() => {
     // fetch pokemon by id
     dispatch(fetchPokemonById(+id));
-  }, []);
+  }, [dispatch, id]);
 
   // SETUP DATA FOR THE COMPOENETS
   const getSprites = () => {
