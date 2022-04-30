@@ -17,7 +17,8 @@ function Pokedex() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPokemon());
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const fetchMorePokemon = () => {
     dispatch(fetchPokemon(next));
   };

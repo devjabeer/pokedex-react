@@ -24,7 +24,7 @@ function AbilitiesCard({ abilities }) {
     setOpen(false);
     setTimeout(() => {
       setContent({});
-    }, 1000);
+    }, 100);
   };
   const handleClick = async (url, title) => {
     setOpen(true);

@@ -24,7 +24,8 @@ function PokemonDetails() {
   useEffect(() => {
     // fetch pokemon by id
     dispatch(fetchPokemonById(+id));
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   // SETUP DATA FOR THE COMPOENETS
   const getSprites = () => {

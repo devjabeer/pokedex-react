@@ -17,7 +17,8 @@ function Favorite() {
   } = useSelector((state) => state.favorite);
   useEffect(() => {
     if (fav !== null) dispatch(fetchFavPokemon(fav));
-  }, [fav, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fav]);
 
   return loading ? (
     <Loading />
