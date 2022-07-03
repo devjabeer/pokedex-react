@@ -7,4 +7,4 @@ Tools used for this project:
 - Redux Toolkit
 - Axios
 
-> Created by Mohammad Jabeer
+> [DEMO](https://n-pokedex.netlify.app/)
